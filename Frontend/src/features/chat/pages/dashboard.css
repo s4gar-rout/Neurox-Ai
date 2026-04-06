@@ -1,0 +1,131 @@
+@import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,700,400&f[]=satoshi@700,500,400&display=swap');
+
+:root {
+  --glass-bg: rgba(0, 0, 0, 0.45);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --accent: #bef264;
+}
+
+body {
+  font-family: 'Satoshi', sans-serif;
+  background-color: #030712;
+  color: #f8fafc;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+h1, h2, h3 {
+  font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.5rem;
+}
+
+.glass-sidebar {
+  background: rgba(5, 8, 20, 0.6);
+  backdrop-filter: blur(24px);
+  border-right: 1px solid var(--glass-border);
+}
+
+.accent-glow {
+  box-shadow: 0 0 20px rgba(190, 242, 100, 0.1);
+}
+
+.message-user {
+  background: rgba(190, 242, 100, 0.05);
+  border: 1px solid rgba(190, 242, 100, 0.1);
+}
+
+.message-ai {
+  background: rgba(15, 23, 42, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Markdown Styles */
+.markdown-content {
+  /* To override whitespace-pre-wrap effect on lists and structures where it might look bad */
+  word-break: break-word;
+}
+.markdown-content p {
+  margin-bottom: 0.75rem;
+}
+.markdown-content p:last-child {
+  margin-bottom: 0;
+}
+.markdown-content h1, .markdown-content h2, .markdown-content h3, .markdown-content h4 {
+  font-weight: 700;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: #f8fafc;
+}
+.markdown-content h1 { font-size: 1.5rem; }
+.markdown-content h2 { font-size: 1.25rem; }
+.markdown-content h3 { font-size: 1.125rem; }
+.markdown-content ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.markdown-content ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.markdown-content li {
+  margin-bottom: 0.25rem;
+}
+.markdown-content li p {
+  margin-bottom: 0; /* no extra margin inside list items */
+}
+.markdown-content code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  font-family: inherit;
+  font-size: 0.875em;
+  color: var(--accent);
+}
+.markdown-content pre {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin-bottom: 0.75rem;
+  border: 1px solid var(--glass-border);
+}
+.markdown-content pre code {
+  background: transparent;
+  padding: 0;
+  color: inherit; /* Code block text should be default color */
+}
+.markdown-content a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.markdown-content strong {
+  font-weight: 700;
+  color: #f8fafc;
+}
