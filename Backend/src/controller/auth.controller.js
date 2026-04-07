@@ -38,14 +38,13 @@ export async function register(req, res) {
     // ✅ dynamic backend URL
     const verifyLink = `${process.env.BACKEND_URL}/api/auth/verify-email?token=${emailVerificationToken}`;
 
-    // ❌ EMAIL DISABLED (fix for pending issue)
-    /*
+    
     await sendEmail({
       to: email,
       subject: "Verify Email",
       html: `<a href="${verifyLink}">Verify Email</a>`,
     });
-    */
+    
 
     res.status(201).json({
       message: "User registered successfully",
