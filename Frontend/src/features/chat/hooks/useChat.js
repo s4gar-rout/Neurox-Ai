@@ -109,11 +109,16 @@ export const useChat = () => {
       console.error("Failed to delete chat:", error);
     }
   }
+  function handleNewChat() {
+    dispatch(setCurrentChatId(null));
+  }
+
   return {
     initializeSocketConnection,
     handleSendMessage,
     handleGetChats,
     handleOpenChat,
     handleDeleteChat,
+    handleNewChat,
   };
 };

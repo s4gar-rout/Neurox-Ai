@@ -64,7 +64,7 @@ const Register = () => {
             </div>
             <h1 className="text-3xl font-bold tracking-tight mb-2">Check your email</h1>
             <p className="text-slate-400 text-sm leading-relaxed mb-6">
-              We've sent a verification link to <span className="text-slate-200 font-semibold">{email}</span>. Please check your inbox and click the link to verify your account.
+              We've sent a verification link to <span className="text-slate-200 font-semibold">{email}</span>. Please check your inbox and spam folder, then click the link to verify your account.
             </p>
             <div className="pt-4">
               <Link to="/login" className="w-full bg-slate-800 text-slate-100 font-bold py-4 rounded-xl shadow-lg border border-white/5 hover:bg-slate-700 transition-all inline-flex items-center justify-center">
