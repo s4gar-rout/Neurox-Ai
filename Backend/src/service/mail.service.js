@@ -1,20 +1,14 @@
 import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 587, // 🔥 important
+    secure: false, // TLS
     auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
     },
 });
-
-transporter.verify()
-    .then(() => {
-        console.log("✅ Email transporter is ready");
-    })
-    .catch((err) => {
-        console.error("❌ Email transporter error:", err);
-    });
 
 export async function sendEmail({ to, subject, html }) {
     try {
@@ -25,7 +19,7 @@ export async function sendEmail({ to, subject, html }) {
             html,
         });
 
-        console.log("📩 Email sent:", info.messageId);
+        console.log("✅ Email sent:", info.messageId);
     } catch (error) {
         console.error("❌ Email send failed:", error);
     }
