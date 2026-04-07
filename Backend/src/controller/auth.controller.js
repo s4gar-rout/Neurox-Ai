@@ -1,7 +1,7 @@
 import userModel from "../model/user.model.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-// import { sendEmail } from "../service/mail.service.js"; // ❌ temporarily disabled
+import { sendEmail } from "../service/mail.service.js";
 
 /**
  * REGISTER
