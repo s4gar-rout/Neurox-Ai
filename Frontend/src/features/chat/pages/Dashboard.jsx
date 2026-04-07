@@ -196,7 +196,7 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="h-screen w-full flex overflow-hidden relative bg-[#030712]">
+    <div className="h-dvh w-full flex overflow-hidden relative bg-[#030712]">
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
