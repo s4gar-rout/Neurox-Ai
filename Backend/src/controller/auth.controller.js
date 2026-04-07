@@ -163,15 +163,45 @@ export async function verifyEmail(req, res) {
     const user = await userModel.findOne({ email: decoded.email });
 
     if (!user) {
-      return res.redirect(`${process.env.FRONTEND_URL}/register`);
+      return res.status(400).send(`
+        <html>
+          <body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f3f4f6; margin: 0;">
+            <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center;">
+              <h2 style="color: #ef4444; margin-bottom: 10px;">Verification Failed</h2>
+              <p style="color: #4b5563; margin-bottom: 20px;">User not found or link is invalid.</p>
+              <a href="${process.env.FRONTEND_URL}/register" style="background-color: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Register</a>
+            </div>
+          </body>
+        </html>
+      `);
     }
 
     user.verified = true;
     await user.save();
 
-    return res.redirect(`${process.env.FRONTEND_URL}/login`);
+    return res.status(200).send(`
+      <html>
+        <body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f3f4f6; margin: 0;">
+          <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center;">
+            <h2 style="color: #10b981; margin-bottom: 10px;">Email Verified Successfully!</h2>
+            <p style="color: #4b5563; margin-bottom: 20px;">You are verified.</p>
+            <a href="${process.env.FRONTEND_URL}/login" style="background-color: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Login Page</a>
+          </div>
+        </body>
+      </html>
+    `);
   } catch (err) {
-    return res.redirect(`${process.env.FRONTEND_URL}/register`);
+    return res.status(400).send(`
+      <html>
+        <body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background-color: #f3f4f6; margin: 0;">
+          <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center;">
+            <h2 style="color: #ef4444; margin-bottom: 10px;">Verification Failed</h2>
+            <p style="color: #4b5563; margin-bottom: 20px;">The verification link is invalid or has expired.</p>
+            <a href="${process.env.FRONTEND_URL}/register" style="background-color: #3b82f6; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold;">Go to Register</a>
+          </div>
+        </body>
+      </html>
+    `);
   }
 }
 
