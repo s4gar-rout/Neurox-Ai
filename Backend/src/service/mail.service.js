@@ -1,17 +1,31 @@
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        type: "OAuth2",
+        user: process.env.GOOGLE_USER,
+        clientId: process.env.GOOGLE_CLIENT_ID,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+    },
+});
+
+// ✅ transporter check (optional but helpful)
+transporter.verify()
+    .then(() => console.log("✅ Gmail transporter ready"))
+    .catch((err) => console.error("❌ Gmail transporter error:", err));
 
 export async function sendEmail({ to, subject, html }) {
     try {
-        const data = await resend.emails.send({
-           from: "Neurox <onboarding@resend.dev>",
+        const info = await transporter.sendMail({
+            from: `"Neurox" <${process.env.GOOGLE_USER}>`,
             to,
             subject,
             html,
         });
 
-        console.log("✅ Email sent:", data);
+        console.log("✅ Email sent:", info.messageId);
     } catch (error) {
         console.error("❌ Email error:", error);
     }
