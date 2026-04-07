@@ -41,8 +41,20 @@ export async function register(req, res) {
     
     await sendEmail({
       to: email,
-      subject: "Verify Email",
-      html: `<a href="${verifyLink}">Verify Email</a>`,
+      subject: "Verify Your Email - Perplexity Clone",
+      html: `
+        <html>
+          <body style="font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f3f4f6; margin: 0; padding: 20px;">
+            <div style="background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 100%;">
+              <h2 style="color: #10b981; margin-bottom: 20px;">Verify Your Email</h2>
+              <p style="color: #4b5563; margin-bottom: 15px; font-size: 16px;">Hi <strong>${username}</strong>,</p>
+              <p style="color: #4b5563; margin-bottom: 30px; font-size: 16px;">Welcome to Neurox! Please confirm your email address to activate your account and start using our service.</p>
+              <a href="${verifyLink}" style="background-color: #3b82f6; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 16px; display: inline-block;">Verify Email</a>
+              <p style="color: #9ca3af; margin-top: 30px; font-size: 12px;">If you didn't request this, you can safely ignore this email.</p>
+            </div>
+          </body>
+        </html>
+      `,
     });
     
 

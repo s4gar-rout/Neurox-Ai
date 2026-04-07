@@ -343,29 +343,29 @@ const Dashboard = () => {
       <main className="flex-1 flex flex-col min-w-0 bg-[#0a0e27]/40">
         {/* Header */}
         <header className="h-14 md:h-16 flex items-center justify-between px-3 md:px-6 border-b border-white/5 bg-[#030712]/90 backdrop-blur-md shrink-0">
-          <div className="flex items-center gap-2 md:gap-4 max-w-[60%] md:max-w-none">
+          <div className="flex items-center gap-3 overflow-hidden">
             <button
-              className="md:hidden text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-white/5 transition-all"
+              className="md:hidden text-slate-400 hover:text-white p-1.5 rounded-lg flex items-center justify-center bg-white/5 hover:bg-white/10 transition-all shrink-0"
               onClick={() => setIsSidebarOpen(true)}
             >
               <iconify-icon
                 icon="lucide:menu"
-                className="text-xl"
+                className="text-2xl"
               ></iconify-icon>
             </button>
-            <span className="text-sm text-slate-300 truncate">
+            <span className="text-sm md:text-base text-slate-300 font-medium truncate">
               {chats?.[currentChatId]?.title?.replace(/[\*"]/g, "") ||
                 chats?.[currentChatId]?.name?.replace(/[\*"]/g, "") ||
                 "Neurox"}
             </span>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
-            <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/3 hover:bg-white/7 border border-white/5 text-xs text-slate-300 transition-all">
-              <iconify-icon icon="lucide:share-2"></iconify-icon>
-              <span className="hidden sm:block">Share</span>
+          <div className="flex items-center gap-2 shrink-0 ml-2">
+            <button className="flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/5 text-xs text-slate-300 transition-all shrink-0">
+              <iconify-icon icon="lucide:share-2" className="text-lg"></iconify-icon>
+              <span className="hidden sm:block font-medium">Share</span>
             </button>
-            <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/5 text-slate-500 transition-all">
-              <iconify-icon icon="lucide:info"></iconify-icon>
+            <button className="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-white/10 text-slate-400 transition-all shrink-0">
+              <iconify-icon icon="lucide:info" className="text-lg"></iconify-icon>
             </button>
           </div>
         </header>
