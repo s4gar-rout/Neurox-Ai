@@ -22,53 +22,62 @@ export const useChat = () => {
 
   async function handleSendMessage({ message, chatId }) {
     dispatch(setLoading(true));
-    const data = await sendMessage({ message, chatId });
-    const { chat, aiMessage } = data;
+    try {
+      const data = await sendMessage({ message, chatId });
+      const { chat, aiMessage } = data;
 
-    if (!chatId) {
-      // ✅ sirf naya chat hone par naya thread banao aur switch karo
-      dispatch(createNewChat({
-        chatId: chat._id,
-        title: chat.title,
+      if (!chatId) {
+        // ✅ sirf naya chat hone par naya thread banao aur switch karo
+        dispatch(createNewChat({
+          chatId: chat._id,
+          title: chat.title,
+        }));
+        dispatch(setCurrentChatId(chat._id)); // ← yahan shift kiya
+      }
+
+      dispatch(addNewMessage({
+        chatId: chatId || chat._id,
+        content: message,
+        role: "user",
       }));
-      dispatch(setCurrentChatId(chat._id)); // ← yahan shift kiya
+
+      dispatch(addNewMessage({
+        chatId: chatId || chat._id,
+        content: aiMessage.content,
+        role: aiMessage.role,
+      }));
+
+    } catch (error) {
+      console.error(error);
+      dispatch(setError(error.message || "Failed to send message"));
+    } finally {
+      dispatch(setLoading(false));
     }
-
-    dispatch(addNewMessage({
-      chatId: chatId || chat._id,
-      content: message,
-      role: "user",
-    }));
-
-    dispatch(addNewMessage({
-      chatId: chatId || chat._id,
-      content: aiMessage.content,
-      role: aiMessage.role,
-    }));
-
- 
-
-    dispatch(setLoading(false));
   }
 
   async function handleGetChats() {
     dispatch(setLoading(true));
-    const data = await getChats();
-    const { chats } = data;
-    dispatch(
-      setChats(
-        chats.reduce((acc, chat) => {
-          acc[chat._id] = {
-            id: chat._id,
-            title: chat.title,
-            messages: [],
-            lastUpdated: chat.updatedAt,
-          };
-          return acc;
-        }, {}),
-      ),
-    );
-    dispatch(setLoading(false));
+    try {
+      const data = await getChats();
+      const { chats } = data;
+      dispatch(
+        setChats(
+          chats.reduce((acc, chat) => {
+            acc[chat._id] = {
+              id: chat._id,
+              title: chat.title,
+              messages: [],
+              lastUpdated: chat.updatedAt,
+            };
+            return acc;
+          }, {}),
+        ),
+      );
+    } catch (error) {
+      console.error("Failed to get chats:", error);
+    } finally {
+      dispatch(setLoading(false));
+    }
   }
 
   async function handleOpenChat(chatId, chats) {
@@ -93,8 +102,12 @@ export const useChat = () => {
     dispatch(setCurrentChatId(chatId));
   }
   async function handleDeleteChat(chatId) {
-    await deleteChat(chatId);
-    dispatch(removeChat(chatId));
+    try {
+      await deleteChat(chatId);
+      dispatch(removeChat(chatId));
+    } catch (error) {
+      console.error("Failed to delete chat:", error);
+    }
   }
   return {
     initializeSocketConnection,

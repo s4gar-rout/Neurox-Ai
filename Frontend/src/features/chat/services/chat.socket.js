@@ -1,7 +1,7 @@
 import { io } from "socket.io-client";
 
 export const initializeSocketConnection = () => {
-  const socket = io(import.meta.env.VITE_API_BASE_URL || "https://neurox-ai.onrender.com", {
+  const socket = io(import.meta.env.VITE_API_BASE_URL || "http://localhost:3000", {
     withCredentials: true,
   });
 

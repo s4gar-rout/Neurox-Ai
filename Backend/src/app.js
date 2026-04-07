@@ -21,7 +21,7 @@ app.use(
 );
 
 app.use('/api/auth', authRouter);
-app.use('/api/chats',chatRouter);
+app.use('/api/chats', chatRouter);
 app.use(express.static("./public"));
 
 
