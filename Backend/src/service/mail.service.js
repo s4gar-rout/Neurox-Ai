@@ -1,21 +1,16 @@
 import nodemailer from "nodemailer";
 
-
-
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
-    port: 587,          // ✅ FIXED
-    secure: false,      // ✅ FIXED
+    port: 587,
+    secure: false,
+    family: 4, // ⭐ Force IPv4
     auth: {
-        type: "OAuth2",
         user: process.env.GOOGLE_USER,
-        clientId: process.env.GOOGLE_CLIENT_ID,
-        clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-        refreshToken: process.env.GOOGLE_REFRESH_TOKEN,
+        pass: process.env.GOOGLE_APP_PASSWORD, // ⭐ Use app password, not regular password
     },
 });
 
-// ✅ transporter check (optional but helpful)
 transporter.verify()
     .then(() => console.log("✅ Gmail transporter ready"))
     .catch((err) => console.error("❌ Gmail transporter error:", err));
@@ -30,7 +25,9 @@ export async function sendEmail({ to, subject, html }) {
         });
 
         console.log("✅ Email sent:", info.messageId);
+        return info;
     } catch (error) {
         console.error("❌ Email error:", error);
+        throw error;
     }
 }
