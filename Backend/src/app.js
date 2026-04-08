@@ -14,9 +14,9 @@ app.use(cookieParser());
 app.use(morgan('dev')); // Log HTTP requests to the console
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "http://localhost:5173", // Allow requests from this origin
-    credentials: true, // Allow cookies to be sent with requests
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed HTTP methods
+    origin: ["http://localhost:5173", "https://neurox-ai-two.vercel.app"],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   }),
 );
 
