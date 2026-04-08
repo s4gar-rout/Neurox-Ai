@@ -197,8 +197,7 @@ const Dashboard = () => {
 
   return (
     <div className="h-dvh w-full flex overflow-hidden relative bg-[#030712]">
-      <div className="glow-blob w-[500px] h-[500px] bg-lime-400 top-[-10%] left-[-10%]"></div>
-      <div className="glow-blob w-[400px] h-[400px] bg-blue-600 bottom-[-5%] right-[-5%]"></div>
+     
       {/* Mobile Overlay */}
       {isSidebarOpen && (
         <div
